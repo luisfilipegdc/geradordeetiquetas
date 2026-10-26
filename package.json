@@ -1,0 +1,29 @@
+{
+  "name": "gerador-de-etiquetas",
+  "version": "1.0.0",
+  "description": "Gera etiquetas de alunos (nome e turma) em PDF para folha A4 Pimaco 38,1 x 99,0 mm (14 por folha)",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luisfilipegdc/geradordeetiquetas.git"
+  },
+  "bugs": {
+    "url": "https://github.com/luisfilipegdc/geradordeetiquetas/issues"
+  },
+  "homepage": "https://github.com/luisfilipegdc/geradordeetiquetas#readme",
+  "dependencies": {
+    "jspdf": "^4.2.1",
+    "pdfjs-dist": "^6.4.299",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "vite": "^8.3.5"
+  },
+  "private": true,
+  "type": "module"
+}

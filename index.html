@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerador de Etiquetas</title>
+    <meta name="description" content="Gere etiquetas de alunos (nome e turma) em PDF para folha A4 Pimaco 38,1 x 99,0 mm." />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏷️</text></svg>" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Gerador de Etiquetas</h1>
+        <p>Folha A4 · etiqueta 38,1 × 99,0 mm · 14 por folha (ex.: Pimaco A4363). Os arquivos não saem do seu computador.</p>
+      </header>
+
+      <section class="cartao">
+        <h2>1. Lista de alunos</h2>
+        <label class="soltar" id="soltar">
+          <input type="file" id="arquivo" accept=".xlsx,.xls,.xlsm,.csv,.ods,.pdf" />
+          <strong>Clique ou arraste</strong> a planilha (Excel, CSV) ou PDF
+          <small>Precisa ter uma coluna "Nome" e, de preferência, "Turma". Se tiver a coluna "Situação do contrato", entram só os "Confirmado".</small>
+        </label>
+        <p id="status" class="status" role="status"></p>
+        <details id="detalhes-lista">
+          <summary>Ver / editar a lista (<span id="total">0</span> alunos)</summary>
+          <p class="dica">Uma linha por aluno no formato <code>Nome ; Turma</code>. Também dá para colar direto do Excel.</p>
+          <textarea id="lista" rows="12" spellcheck="false" placeholder="MARIA DA SILVA ; 6º A&#10;JOÃO PEREIRA ; 6º A"></textarea>
+        </details>
+      </section>
+
+      <section class="cartao" id="secao-turmas" hidden>
+        <h2>2. Turmas</h2>
+        <div class="acoes-turmas">
+          <input type="search" id="busca-turma" placeholder="Filtrar turmas (ex.: EF6)" />
+          <button type="button" id="marcar-todas">Marcar visíveis</button>
+          <button type="button" id="desmarcar-todas">Desmarcar visíveis</button>
+        </div>
+        <div id="turmas" class="turmas"></div>
+        <p class="resumo" id="resumo"></p>
+      </section>
+
+      <section class="cartao">
+        <h2>3. Opções</h2>
+        <div class="opcoes">
+          <label><input type="checkbox" id="ordenar" checked /> Ordenar por turma e nome</label>
+          <label><input type="checkbox" id="folha-por-turma" /> Cada turma começa em folha nova</label>
+          <label><input type="checkbox" id="prefixo" checked /> Escrever "Turma:" antes da turma</label>
+          <label><input type="checkbox" id="maiusculas" /> Nome em MAIÚSCULAS</label>
+          <label><input type="checkbox" id="bordas" /> Mostrar contorno das etiquetas (para teste em papel comum)</label>
+        </div>
+        <div class="numeros">
+          <label>Começar na etiqueta nº <input type="number" id="inicio" min="1" max="14" value="1" /></label>
+          <label>Ajuste horizontal (mm) <input type="number" id="ajuste-x" step="0.5" value="0" /></label>
+          <label>Ajuste vertical (mm) <input type="number" id="ajuste-y" step="0.5" value="0" /></label>
+        </div>
+        <p class="dica">Imprima sempre em <strong>tamanho real / 100%</strong> (desmarque "ajustar à página"). Se sair deslocado, use os ajustes: positivo move para a direita/baixo.</p>
+      </section>
+
+      <div class="rodape">
+        <button type="button" id="gerar" class="principal" disabled>Gerar PDF</button>
+        <a id="baixar" class="botao" hidden download="etiquetas.pdf">Baixar PDF</a>
+      </div>
+
+      <iframe id="previa" title="Prévia do PDF" hidden></iframe>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
